@@ -5,7 +5,6 @@ const userInput = document.getElementById("user-input");
 // Handle submit
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-
   const message = userInput.value.trim();
   if (!message) return;
 
@@ -13,7 +12,7 @@ chatForm.addEventListener("submit", async (e) => {
   appendMessage(message, "user");
   userInput.value = "";
 
-  // Add loading message
+  // Add temporary "thinking" message
   const loadingMsg = appendMessage("Thinking...", "bot");
 
   try {
@@ -25,27 +24,24 @@ chatForm.addEventListener("submit", async (e) => {
   }
 });
 
-// Add message to chat
+// Append message to chat box
 function appendMessage(text, sender) {
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("message", sender);
   msgDiv.textContent = text;
-
   chatBox.appendChild(msgDiv);
 
-  // Scroll to bottom always
+  // Scroll to bottom automatically
   chatBox.scrollTop = chatBox.scrollHeight;
 
   return msgDiv;
 }
 
-// Backend call
+// Call backend API
 async function getGeminiReply(prompt) {
   const response = await fetch("http://127.0.0.1:8000/chat", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message: prompt }),
   });
 

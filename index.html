@@ -7,25 +7,48 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="chat-container">
-    <header>
-      <h1>Gemini AI Chat</h1>
-    </header>
+  <div class="chat-app">
 
-    <div id="chat-box" class="chat-box">
-      <div class="message bot">Hi 👋, I'm Gemini AI. How can I help you today?</div>
+    <!-- Sidebar with chat history -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Gemini AI</h2>
+        <button class="login-btn">Login</button>
+      </div>
+      <div class="chat-history">
+        <!-- Example previous chats -->
+        <div class="history-item">
+          <p class="history-title">Chat with Gemini</p>
+          <p class="history-snippet">Hi 👋, I'm Gemini AI. How can...</p>
+        </div>
+        <div class="history-item">
+          <p class="history-title">Chat with Gemini</p>
+          <p class="history-snippet">Can you explain JS promises...</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main chat area -->
+    <div class="chat-container">
+      <header>
+        <h1>Gemini AI Chat</h1>
+      </header>
+
+      <div id="chat-box" class="chat-box">
+        <div class="message bot">Hi 👋, I'm Gemini AI. How can I help you today?</div>
+      </div>
+
+      <form id="chat-form" class="chat-form">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Type your message..."
+          autocomplete="off"
+          required
+        />
+        <button type="submit">Send</button>
+      </form>
     </div>
-
-    <form id="chat-form" class="chat-form">
-      <input
-        type="text"
-        id="user-input"
-        placeholder="Type your message..."
-        autocomplete="off"
-        required
-      />
-      <button type="submit">Send</button>
-    </form>
   </div>
 
   <script src="script.js"></script>
