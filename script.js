@@ -2,19 +2,20 @@ const chatForm = document.getElementById("chat-form");
 const chatBox = document.getElementById("chat-box");
 const userInput = document.getElementById("user-input");
 
+// Handle submit
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const message = userInput.value.trim();
   if (!message) return;
 
-  // Add user message to chat
+  // Add user message
   appendMessage(message, "user");
   userInput.value = "";
 
-  // Placeholder loading message
+  // Add loading message
   const loadingMsg = appendMessage("Thinking...", "bot");
 
-  // Call Gemini API (pseudo-code)
   try {
     const reply = await getGeminiReply(message);
     loadingMsg.textContent = reply;
@@ -24,27 +25,28 @@ chatForm.addEventListener("submit", async (e) => {
   }
 });
 
+// Add message to chat
 function appendMessage(text, sender) {
   const msgDiv = document.createElement("div");
   msgDiv.classList.add("message", sender);
   msgDiv.textContent = text;
+
   chatBox.appendChild(msgDiv);
+
+  // Scroll to bottom always
   chatBox.scrollTop = chatBox.scrollHeight;
+
   return msgDiv;
 }
 
-// Placeholder for Gemini API call
+// Backend call
 async function getGeminiReply(prompt) {
-  // Replace YOUR_API_KEY and endpoint with your actual Gemini API info
-  
-  const response = await fetch("http://127.0.0.1:8000/chat",{
+  const response = await fetch("http://127.0.0.1:8000/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      message:prompt
-    }),
+    body: JSON.stringify({ message: prompt }),
   });
 
   const data = await response.json();
