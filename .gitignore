@@ -7,4 +7,4 @@ __pycache__/
 
 # Ignore local virtual environments (optional)
 venv/
-chatbot/
+chatbotapp/
