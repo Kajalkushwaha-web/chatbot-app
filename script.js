@@ -40,15 +40,37 @@ function appendMessage(text, sender) {
 }
 
 // Backend call
+// async function getGeminiReply(prompt) {
+//   const response = await fetch("http://127.0.0.1:8000/chat", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ message: prompt }),
+//   });
+
+//   const data = await response.json();
+//   return data.reply || "No response.";
+// }
+
+//for docker only
+//Backend call
 async function getGeminiReply(prompt) {
-  const response = await fetch("http://127.0.0.1:8000/chat", {
+  // REMOVE the full http://127.0.0.1:8000 address
+  // USE just "/chat"
+  const response = await fetch("/chat", { 
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ message: prompt }),
   });
+  if (!response.ok) {
+     const errorData = await response.json();
+     throw new Error(errorData.reply || "Server Error");
+  }
 
   const data = await response.json();
   return data.reply || "No response.";
 }
+

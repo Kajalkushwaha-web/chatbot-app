@@ -1,0 +1,4 @@
+chatbotapp/
+.env
+.gitignore
+__pycache__/
